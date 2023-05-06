@@ -1,0 +1,42 @@
+.wrapper {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0 24px;
+  height: 184px;
+  width: 316px;
+  border-radius: 4px;
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+}
+.emoji {
+  margin: 24px auto 18px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 48px;
+  text-align: center;
+}
+.title {
+  margin: 0;
+  font-family: "Inter";
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+.description {
+  margin-top: 12px;
+  font-family: "Inter";
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+@media (max-width: 370px) {
+  .wrapper {
+    width: 300px;
+  }
+}
