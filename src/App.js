@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { emoji } from "./emoji/emoji.js";
 
@@ -31,14 +31,13 @@ function App() {
   // Showing emoji
   const [arrEmoji, setArrEmoji] = useState(emojiWithoutRepeat);
 
-  console.log(arrEmoji);
-
+  useEffect(() => {
+    setArrEmoji(filterEmoji());
+  }, [inputValue]);
   // Input handler
   const inputValueHandler = (event) => {
     setInputValue(event.target.value);
-    // filterEmoji();
-    setArrEmoji(filterEmoji());
-    // console.log(emojiOnPage);
+    setCurrentPage(1);
   };
 
   // Select handler
