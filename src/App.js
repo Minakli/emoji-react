@@ -6,6 +6,15 @@ import Header from "./components/Header/Header.jsx";
 import Main from "./components/Main/Main.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import Card from "./components/Card/Card.jsx";
+import Pagination from "./components/Pagination/Pagination.jsx";
+
+// Deleting repeat words
+let emojiWithoutRepeat = emoji.map((elem) => ({
+  title: elem.title,
+  symbol: elem.symbol,
+  keywords: Array.from(new Set(elem.keywords.split(" "))).join(" "),
+}));
+// console.log(emojiWithoutRepeat);
 
 function App() {
   let numOfPages;
@@ -19,65 +28,64 @@ function App() {
   // Current page
   const [currentPage, setCurrentPage] = useState(1);
 
+  // Showing emoji
+  const [arrEmoji, setArrEmoji] = useState(emojiWithoutRepeat);
+
+  console.log(arrEmoji);
+
   // Input handler
   const inputValueHandler = (event) => {
     setInputValue(event.target.value);
-    setArrEmoji(emojiOnPage);
-    console.log(emojiOnPage);
+    // filterEmoji();
+    setArrEmoji(filterEmoji());
+    // console.log(emojiOnPage);
   };
 
   // Select handler
   const numPerPageHandler = (event) => {
     setNumPerPage(event.target.value);
-    setArrEmoji(emojiOnPage);
-    console.log(emojiOnPage);
+    setCurrentPage(1);
   };
+
+  // Number of pages
+  numOfPages = Math.ceil(arrEmoji.length / numPerPage);
+  console.log(numOfPages);
 
   //Array buttons
   let arrBtn = [];
   if (currentPage < 5) {
     for (let i = 1; i < 6; i++) {
       arrBtn.push(i);
+      console.log(i);
     }
   } else if (currentPage > numOfPages - 3) {
     for (let i = numOfPages - 5; i < numOfPages; i++) {
       arrBtn.push(i);
+      console.log(i);
     }
   } else {
     for (let i = currentPage - 3; i < currentPage + 2 && i <= numOfPages; i++) {
       arrBtn.push(i);
+      console.log(i);
     }
   }
-
+  console.log(arrBtn);
   console.log(currentPage);
 
-  // Deleting repeat words
-  emoji.map(
-    (elem) =>
-      (elem.keywords = Array.from(new Set(elem.keywords.split(" "))).join(" "))
-  );
-
   //-----------------------------------
-  const [arrEmoji, setArrEmoji] = useState(emoji.splice(0, numPerPage));
 
   // Filter emoji
-  let emojiFiltred = emoji.filter((elem) =>
-    elem.title.toLowerCase().includes(inputValue.toLowerCase())
-  );
-
-  // setArrEmoji(a);
-  console.log(emojiFiltred);
-
-  // Number of pages
-  numOfPages = Math.ceil(emojiFiltred.length / numPerPage);
-  console.log(numOfPages);
+  function filterEmoji() {
+    return emojiWithoutRepeat.filter((elem) =>
+      elem.title.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  }
 
   // Making emoji page
-  let emojiOnPage = emojiFiltred.splice(
-    currentPage * (numPerPage - 1) + 1,
+  let emojiOnPage = arrEmoji.slice(
+    currentPage * numPerPage - numPerPage,
     currentPage * numPerPage
   );
-  console.log(emojiOnPage);
   // Set emoji for showing
   // const ShowEmoji = () => setArrEmoji(emojiOnPage);
 
@@ -93,7 +101,7 @@ function App() {
         arrEmoji={arrEmoji}
       >
         {console.log(111)}
-        {arrEmoji.map((e, i) => (
+        {emojiOnPage.map((e, i) => (
           <Card
             key={i}
             emoji={e.symbol}
@@ -109,7 +117,13 @@ function App() {
         numOfPages={numOfPages}
         arrBtn={arrBtn}
         setCurrentPage={setCurrentPage}
-      ></Footer>
+      >
+        <Pagination
+          arrBtn={arrBtn}
+          setCurrentPage={setCurrentPage}
+          numOfPages={numOfPages}
+        />
+      </Footer>
     </>
   );
 }

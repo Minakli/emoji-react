@@ -18,33 +18,7 @@
   /* margin-top: 51px; */
   background-color: #ced4da;
 }
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 18px;
-  max-width: 1014px;
-}
-.firstbtn {
-  box-sizing: border-box;
-  width: 62px;
-  height: 38px;
-}
-.lastbtn {
-  box-sizing: border-box;
-  width: 62px;
-  height: 38px;
-}
-.btn {
-  box-sizing: border-box;
-  height: 38px;
-  padding: 0 14px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 16px;
-  color: #055160;
-}
+
 .p {
   display: inline-block;
   margin-right: 12px;

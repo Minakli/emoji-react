@@ -6,32 +6,13 @@ const Footer = ({
   numOfPages,
   arrBtn,
   setCurrentPage,
+  children,
 }) => {
   return (
     <div className={style.footer}>
       <div className={style.decorline}></div>
       <div className={style.container}>
-        <div className={style.buttons}>
-          <button className={style.btn} onClick={() => setCurrentPage(1)}>
-            First
-          </button>
-          {arrBtn.map((elem) => (
-            <button
-              key={Math.random()}
-              className={style.btn}
-              onClick={() => setCurrentPage(elem + 1)}
-            >
-              {elem + 1}
-            </button>
-          ))}
-          <button
-            className={style.btn}
-            onClick={() => setCurrentPage(numOfPages)}
-          >
-            Last
-          </button>
-        </div>
-
+        {children}
         <div>
           <p className={style.p}>Per page</p>
           <select value={numPerPage} onChange={numPerPageHandler}>
